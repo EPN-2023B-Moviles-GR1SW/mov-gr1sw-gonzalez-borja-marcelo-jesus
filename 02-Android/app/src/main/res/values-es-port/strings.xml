@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="saludo">Buenos Dias</string>
+    <color name="colorTxt">#FFFFFF</color>
+    <color name="colorBack">#000000</color>
+    <dimen name="font_size">34sp</dimen>
+</resources>

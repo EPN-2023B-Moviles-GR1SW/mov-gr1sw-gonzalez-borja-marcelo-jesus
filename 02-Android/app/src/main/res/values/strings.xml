@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">B2023-gr1sw-mjgb</string>
-    <string name="saludo">Buenos Dias</string>
+    <string name="saludo">Good Morning</string>
+    <color name="colorTxt">#8BC34A</color>
+    <color name="colorBack">#44144C</color>
+    <dimen name="font_size">34sp</dimen>
 </resources>
