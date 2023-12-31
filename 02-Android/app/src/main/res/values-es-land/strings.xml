@@ -4,4 +4,9 @@
     <color name="colorTxt">#630E0E</color>
     <color name="colorBack">#988568</color>
     <dimen name="font_size">54sp</dimen>
+    <string-array name="string_array_opciones_dialogo">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+    </string-array>
 </resources>

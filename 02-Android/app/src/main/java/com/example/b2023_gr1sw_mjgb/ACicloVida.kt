@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 
 class ACicloVida : AppCompatActivity() {
-
     var textoGlobal = ""
 
     fun mostrarSnackbar(texto: String) {
@@ -45,5 +44,29 @@ class ACicloVida : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mostrarSnackbar("onDestroy")
+    }
+
+    // aqui vamos a guardar las variables primitivas
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.run{
+            // GUARDAR VARIABLES
+            // PRIMITIVOS
+            putString("textoGuardado", textoGlobal)
+            //putInt("numeroGuardado", numero)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    // aqui recuperamos las variables guardadas
+    override fun onRestoreInstanceState(savedInstanceState: Bundle){
+        super.onRestoreInstanceState(savedInstanceState)
+        // RECUPERAR VARIABLES
+        // PRIMITIVOS
+        val textoRecuperado:String? = savedInstanceState.getString("textoGuardado")
+        //val textoRecuperado:Int? = savedInstanceState.getInt("numeroGuardado")
+        if (textoRecuperado!=null){
+            mostrarSnackbar(textoRecuperado)
+            textoGlobal = textoRecuperado
+        }
     }
 }
