@@ -10,22 +10,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/Theme.Design"
         tools:targetApi="31">
         <activity
-            android:name=".FRecyclerView"
+            android:name=".Actualizar_Ciudad"
             android:exported="false" />
         <activity
-            android:name=".ECrudEntrenador"
+            android:name=".Actualizar_Pais"
             android:exported="false" />
         <activity
-            android:name=".CIntentExplicitoParametros"
+            android:name=".Crear_Ciudad"
             android:exported="false" />
         <activity
-            android:name=".BListView"
+            android:name=".Crear_Pais"
             android:exported="false" />
         <activity
-            android:name=".ACicloVida"
+            android:name=".Actividad_Ciudad"
+            android:exported="false" />
+        <activity
+            android:name=".Actividad_Pais"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

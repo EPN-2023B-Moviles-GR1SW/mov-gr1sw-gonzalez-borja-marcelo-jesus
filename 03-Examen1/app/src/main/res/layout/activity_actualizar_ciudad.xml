@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Actualizar_Ciudad">
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="408dp"
+        android:text="ACTUALIZAR CIUDAD"
+        app:layout_constraintBottom_toTopOf="@+id/btn_actualizar_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/btn_actualizar_ciudad"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="@+id/btn_actualizar_ciudad" />
+
+    <Button
+        android:id="@+id/btn_actualizar_ciudad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTUALIZAR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.702" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_id_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/input_a_id_ciudad" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="ID Pais:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintEnd_toStartOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintTop_toTopOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintVertical_bias="0.457" />
+
+    <EditText
+        android:id="@+id/input_a_id_ciudad"
+        android:layout_width="236dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="ID"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_nombre_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_nombre_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_a_nombre_ciudad" />
+
+    <EditText
+        android:id="@+id/input_a_nombre_ciudad"
+        android:layout_width="236dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Nombre:"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_a_idPais_ciudad" />
+
+    <EditText
+        android:id="@+id/input_a_idPais_ciudad"
+        android:layout_width="236dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="80dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="ID Pais:"
+        app:layout_constraintBottom_toTopOf="@+id/btn_actualizar_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/btn_actualizar_ciudad"
+        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintStart_toStartOf="@+id/btn_actualizar_ciudad" />
+</androidx.constraintlayout.widget.ConstraintLayout>
