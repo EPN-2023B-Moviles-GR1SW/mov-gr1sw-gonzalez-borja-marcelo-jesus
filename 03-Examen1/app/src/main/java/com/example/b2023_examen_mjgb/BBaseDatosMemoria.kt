@@ -4,9 +4,9 @@ class BBaseDatosMemoria {
     companion object{
         val arregloBPais = arrayListOf<BPais>()
         init {
-            arregloBPais.add(BPais(1,"Ecuador","Quito"))
-            arregloBPais.add(BPais(2,"Japon","Tokio"))
-            arregloBPais.add(BPais(3,"Mexico","CDMX"))
+            arregloBPais.add(BPais(1,"Ecuador","Quito",1000,1.1))
+            arregloBPais.add(BPais(2,"Japon","Tokio",2000,1.2))
+            arregloBPais.add(BPais(3,"Mexico","CDMX",3000,1.3))
         }
 
         val arregloBCiudad = arrayListOf<BCiudad>()

@@ -8,6 +8,54 @@
     tools:context=".Crear_Pais">
 
     <EditText
+        android:id="@+id/input_tasa_pais"
+        android:layout_width="236dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="56dp"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        android:hint="Tasa de Crecimineto"
+        app:layout_constraintBottom_toTopOf="@+id/btn_crear_pais"
+        app:layout_constraintEnd_toEndOf="@+id/btn_crear_pais"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="@+id/btn_crear_pais" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="132dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:text="T. Crecimiento:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_tasa_pais"
+        app:layout_constraintEnd_toStartOf="@+id/input_tasa_pais"
+        app:layout_constraintTop_toTopOf="@+id/input_tasa_pais" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poblacion:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_poblacion_pais"
+        app:layout_constraintEnd_toEndOf="@+id/textView24"
+        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintTop_toTopOf="@+id/input_poblacion_pais" />
+
+    <EditText
+        android:id="@+id/input_poblacion_pais"
+        android:layout_width="236dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Ingrese la Poblacion"
+        app:layout_constraintBottom_toTopOf="@+id/input_tasa_pais"
+        app:layout_constraintEnd_toEndOf="@+id/input_tasa_pais"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_tasa_pais" />
+
+    <EditText
         android:id="@+id/input_id_pais"
         android:layout_width="236dp"
         android:layout_height="67dp"
@@ -24,14 +72,14 @@
         android:id="@+id/input_capital_pais"
         android:layout_width="236dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Ingrese la Capital"
-        app:layout_constraintBottom_toTopOf="@+id/btn_crear_pais"
-        app:layout_constraintEnd_toEndOf="@+id/btn_crear_pais"
-        app:layout_constraintHorizontal_bias="0.074"
-        app:layout_constraintStart_toStartOf="@+id/btn_crear_pais" />
+        android:hint="Ingrese la Capital"
+        app:layout_constraintBottom_toTopOf="@+id/input_poblacion_pais"
+        app:layout_constraintEnd_toEndOf="@+id/input_poblacion_pais"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_poblacion_pais" />
 
     <EditText
         android:id="@+id/input_nombre_pais"
@@ -40,7 +88,7 @@
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Ingrese el Nombre"
+        android:hint="Ingrese el Nombre"
         app:layout_constraintBottom_toTopOf="@+id/input_capital_pais"
         app:layout_constraintEnd_toEndOf="@+id/input_capital_pais"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,11 +99,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="360dp"
+        android:layout_marginBottom="576dp"
         android:text="INGRESE SU PAIS"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_crear_pais"
         app:layout_constraintEnd_toEndOf="@+id/btn_crear_pais"
-        app:layout_constraintHorizontal_bias="0.633"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/btn_crear_pais" />
 
     <Button
@@ -68,7 +117,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
+        app:layout_constraintVertical_bias="0.956" />
 
     <TextView
         android:id="@+id/textView5"
@@ -97,11 +146,11 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:text="Capital"
+        android:text="Capital:"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/input_capital_pais"
-        app:layout_constraintEnd_toStartOf="@+id/input_capital_pais"
+        app:layout_constraintEnd_toEndOf="@+id/textView22"
+        app:layout_constraintStart_toStartOf="@+id/textView22"
         app:layout_constraintTop_toTopOf="@+id/input_capital_pais"
         app:layout_constraintVertical_bias="0.657" />
 </androidx.constraintlayout.widget.ConstraintLayout>

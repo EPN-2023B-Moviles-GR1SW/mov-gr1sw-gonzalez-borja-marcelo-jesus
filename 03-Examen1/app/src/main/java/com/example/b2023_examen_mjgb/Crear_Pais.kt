@@ -19,10 +19,28 @@ class Crear_Pais : AppCompatActivity() {
             val id = findViewById<EditText>(R.id.input_id_pais).text.toString().toInt()
             val nombre = findViewById<EditText>(R.id.input_nombre_pais).text.toString()
             val capital = findViewById<EditText>(R.id.input_capital_pais).text.toString()
-            val nuevoPais = BPais(id, nombre, capital)
+            val poblacion = findViewById<EditText>(R.id.input_poblacion_pais).getIntValueOrDefault()
+            val tasa = findViewById<EditText>(R.id.input_tasa_pais).getDoubleValueOrDefault()
+            val nuevoPais = BPais(id, nombre, capital,poblacion,tasa)
             BBaseDatosMemoria.arregloBPais.add(nuevoPais)
             adaptadorPais.notifyDataSetChanged()
             finish()
+        }
+    }
+
+    fun EditText.getIntValueOrDefault(defaultValue: Int = 0): Int {
+        return try {
+            text.toString().toInt()
+        } catch (e: NumberFormatException) {
+            defaultValue
+        }
+    }
+
+    fun EditText.getDoubleValueOrDefault(defaultValue: Double = 0.0): Double {
+        return try {
+            text.toString().toDouble()
+        } catch (e: NumberFormatException) {
+            defaultValue
         }
     }
 }

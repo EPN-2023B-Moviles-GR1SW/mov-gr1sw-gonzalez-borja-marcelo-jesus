@@ -6,15 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".Actualizar_Ciudad">
 
+    <EditText
+        android:id="@+id/input_a_nombre_ciudad4"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Capital"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_a_idPais_ciudad" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capital:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad4"
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad4"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <EditText
+        android:id="@+id/input_a_nombre_ciudad3"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="datetime|date"
+        android:text="Fecha Fundacion"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_nombre_ciudad4"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_nombre_ciudad4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_a_nombre_ciudad4" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha Fundacion:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad3"
+        app:layout_constraintEnd_toEndOf="@+id/textView29"
+        app:layout_constraintStart_toStartOf="@+id/textView29"
+        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad3"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <EditText
+        android:id="@+id/input_a_poblacion_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Poblacion"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_nombre_ciudad3"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_nombre_ciudad3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_a_nombre_ciudad3" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poblacion:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_poblacion_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView28"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toTopOf="@+id/input_a_poblacion_ciudad"
+        app:layout_constraintVertical_bias="0.571" />
+
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="408dp"
+        android:layout_marginBottom="592dp"
         android:text="ACTUALIZAR CIUDAD"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_actualizar_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/btn_actualizar_ciudad"
-        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="@+id/btn_actualizar_ciudad" />
 
     <Button
@@ -27,46 +102,12 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.702" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_a_id_ciudad"
-        app:layout_constraintEnd_toEndOf="@+id/textView18"
-        app:layout_constraintStart_toStartOf="@+id/textView18"
-        app:layout_constraintTop_toTopOf="@+id/input_a_id_ciudad" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad"
-        app:layout_constraintEnd_toEndOf="@+id/textView19"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="ID Pais:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintEnd_toStartOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintTop_toTopOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.956" />
 
     <EditText
         android:id="@+id/input_a_id_ciudad"
-        android:layout_width="236dp"
-        android:layout_height="67dp"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
@@ -76,29 +117,66 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/input_a_nombre_ciudad" />
 
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView27"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_id_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/input_a_id_ciudad"
+        app:layout_constraintVertical_bias="0.314" />
+
     <EditText
         android:id="@+id/input_a_nombre_ciudad"
-        android:layout_width="236dp"
-        android:layout_height="67dp"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
         android:text="Nombre:"
-        app:layout_constraintBottom_toTopOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintEnd_toEndOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_a_idPais_ciudad" />
+        app:layout_constraintBottom_toTopOf="@+id/input_a_poblacion_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_poblacion_ciudad"
+        app:layout_constraintStart_toStartOf="@+id/input_a_poblacion_ciudad" />
 
     <EditText
         android:id="@+id/input_a_idPais_ciudad"
-        android:layout_width="236dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
         android:inputType="text"
         android:text="ID Pais:"
         app:layout_constraintBottom_toTopOf="@+id/btn_actualizar_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/btn_actualizar_ciudad"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_actualizar_ciudad" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="ID Pais:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintEnd_toStartOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintTop_toTopOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintVertical_bias="0.457" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
