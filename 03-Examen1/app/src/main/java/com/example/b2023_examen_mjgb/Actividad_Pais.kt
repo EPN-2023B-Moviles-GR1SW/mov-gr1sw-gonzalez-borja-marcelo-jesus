@@ -37,18 +37,14 @@ class Actividad_Pais : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.mi_editar_pais ->{
-                mostrarSnackbar("${posicionItemSeleccionado}")
-                val idPaisSeleccionado = arreglo[posicionItemSeleccionado].id
                 irActividadConId(Actualizar_Pais::class.java, posicionItemSeleccionado)
                 return true
             }
             R.id.mi_eliminar_pais ->{
-                mostrarSnackbar("${posicionItemSeleccionado}")
                 abrirDialogo()
                 return true
             }
             R.id.mi_ver_ciudades ->{
-                mostrarSnackbar("${posicionItemSeleccionado}")
                 val idPaisSeleccionado = arreglo[posicionItemSeleccionado].id
                 irActividadConId(Actividad_Ciudad::class.java, idPaisSeleccionado)
                 return true

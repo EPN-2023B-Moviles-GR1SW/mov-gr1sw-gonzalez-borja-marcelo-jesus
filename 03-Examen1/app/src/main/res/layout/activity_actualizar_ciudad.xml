@@ -6,43 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".Actualizar_Ciudad">
 
-    <EditText
-        android:id="@+id/input_a_nombre_ciudad4"
-        android:layout_width="228dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Capital"
-        app:layout_constraintBottom_toTopOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintEnd_toEndOf="@+id/input_a_idPais_ciudad"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_a_idPais_ciudad" />
-
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Capital:"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad4"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_captal_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/textView19"
         app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad4"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintTop_toTopOf="@+id/input_a_captal_ciudad" />
 
     <EditText
-        android:id="@+id/input_a_nombre_ciudad3"
+        android:id="@+id/input_a_fecha_ciudad"
         android:layout_width="228dp"
         android:layout_height="55dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
+        android:hint="Fecha Fundacion"
         android:inputType="datetime|date"
-        android:text="Fecha Fundacion"
-        app:layout_constraintBottom_toTopOf="@+id/input_a_nombre_ciudad4"
-        app:layout_constraintEnd_toEndOf="@+id/input_a_nombre_ciudad4"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_captal_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_captal_ciudad"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_a_nombre_ciudad4" />
+        app:layout_constraintStart_toStartOf="@+id/input_a_captal_ciudad" />
 
     <TextView
         android:id="@+id/textView28"
@@ -50,10 +36,10 @@
         android:layout_height="wrap_content"
         android:text="Fecha Fundacion:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_a_nombre_ciudad3"
+        app:layout_constraintBottom_toBottomOf="@+id/input_a_fecha_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/textView29"
         app:layout_constraintStart_toStartOf="@+id/textView29"
-        app:layout_constraintTop_toTopOf="@+id/input_a_nombre_ciudad3"
+        app:layout_constraintTop_toTopOf="@+id/input_a_fecha_ciudad"
         app:layout_constraintVertical_bias="0.511" />
 
     <EditText
@@ -63,11 +49,11 @@
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="number"
-        android:text="Poblacion"
-        app:layout_constraintBottom_toTopOf="@+id/input_a_nombre_ciudad3"
-        app:layout_constraintEnd_toEndOf="@+id/input_a_nombre_ciudad3"
+        android:hint="Poblacion"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_fecha_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_fecha_ciudad"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_a_nombre_ciudad3" />
+        app:layout_constraintStart_toStartOf="@+id/input_a_fecha_ciudad" />
 
     <TextView
         android:id="@+id/textView27"
@@ -149,7 +135,7 @@
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Nombre:"
+        android:hint="Nombre:"
         app:layout_constraintBottom_toTopOf="@+id/input_a_poblacion_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/input_a_poblacion_ciudad"
         app:layout_constraintStart_toStartOf="@+id/input_a_poblacion_ciudad" />
@@ -171,12 +157,24 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="28dp"
         android:text="ID Pais:"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/input_a_idPais_ciudad"
         app:layout_constraintEnd_toStartOf="@+id/input_a_idPais_ciudad"
         app:layout_constraintTop_toTopOf="@+id/input_a_idPais_ciudad"
         app:layout_constraintVertical_bias="0.457" />
+
+    <CheckBox
+        android:id="@+id/input_a_captal_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:text="Es la Capital?"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_a_idPais_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_a_idPais_ciudad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

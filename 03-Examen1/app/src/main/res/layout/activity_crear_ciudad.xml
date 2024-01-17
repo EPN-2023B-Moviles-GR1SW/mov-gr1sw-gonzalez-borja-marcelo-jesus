@@ -7,42 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".Crear_Ciudad">
 
-    <EditText
-        android:id="@+id/input_nombre_ciudad4"
-        android:layout_width="228dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Ingrese si es Capitral"
-        app:layout_constraintBottom_toTopOf="@+id/input_idpais_ciudad"
-        app:layout_constraintEnd_toEndOf="@+id/input_idpais_ciudad"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_idpais_ciudad" />
-
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Capital:"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_nombre_ciudad4"
+        app:layout_constraintBottom_toBottomOf="@+id/input_capital_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/input_nombre_ciudad4" />
+        app:layout_constraintTop_toTopOf="@+id/input_capital_ciudad" />
 
     <EditText
-        android:id="@+id/input_nombre_ciudad3"
+        android:id="@+id/input_fecha_ciudad"
         android:layout_width="228dp"
         android:layout_height="55dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:inputType="datetime|date"
         android:hint="Fecha de Fundacion"
-        app:layout_constraintBottom_toTopOf="@+id/input_nombre_ciudad4"
-        app:layout_constraintEnd_toEndOf="@+id/input_nombre_ciudad4"
+        android:inputType="datetime|date"
+        app:layout_constraintBottom_toTopOf="@+id/input_capital_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_capital_ciudad"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_nombre_ciudad4" />
+        app:layout_constraintStart_toStartOf="@+id/input_capital_ciudad" />
 
     <TextView
         android:id="@+id/textView25"
@@ -50,10 +37,10 @@
         android:layout_height="wrap_content"
         android:text="Fecha Fundacion"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/input_nombre_ciudad3"
+        app:layout_constraintBottom_toBottomOf="@+id/input_fecha_ciudad"
         app:layout_constraintEnd_toEndOf="@+id/textView26"
         app:layout_constraintStart_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toTopOf="@+id/input_nombre_ciudad3" />
+        app:layout_constraintTop_toTopOf="@+id/input_fecha_ciudad" />
 
     <EditText
         android:id="@+id/input_poblacion_ciudad"
@@ -63,10 +50,10 @@
         android:ems="10"
         android:inputType="number"
         android:hint="Ingrese la Poblacion"
-        app:layout_constraintBottom_toTopOf="@+id/input_nombre_ciudad3"
-        app:layout_constraintEnd_toEndOf="@+id/input_nombre_ciudad3"
+        app:layout_constraintBottom_toTopOf="@+id/input_fecha_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_fecha_ciudad"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_nombre_ciudad3" />
+        app:layout_constraintStart_toStartOf="@+id/input_fecha_ciudad" />
 
     <TextView
         android:id="@+id/textView23"
@@ -175,5 +162,17 @@
         app:layout_constraintEnd_toStartOf="@+id/input_idpais_ciudad"
         app:layout_constraintTop_toTopOf="@+id/input_idpais_ciudad"
         app:layout_constraintVertical_bias="0.478" />
+
+    <CheckBox
+        android:id="@+id/input_capital_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:text="Es la Capital?"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/input_idpais_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_idpais_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_idpais_ciudad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

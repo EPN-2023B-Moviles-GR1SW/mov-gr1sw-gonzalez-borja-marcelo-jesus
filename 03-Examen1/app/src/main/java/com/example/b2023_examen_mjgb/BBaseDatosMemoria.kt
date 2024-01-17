@@ -11,10 +11,10 @@ class BBaseDatosMemoria {
 
         val arregloBCiudad = arrayListOf<BCiudad>()
         init {
-            arregloBCiudad.add(BCiudad(1,"Quito",1))
-            arregloBCiudad.add(BCiudad(2,"Manta",1))
-            arregloBCiudad.add(BCiudad(3,"Tokio",2))
-            arregloBCiudad.add(BCiudad(4,"Jalisco",3))
+            arregloBCiudad.add(BCiudad(1,"Quito",1,1000,false))
+            arregloBCiudad.add(BCiudad(2,"Manta",1,2000,true))
+            arregloBCiudad.add(BCiudad(3,"Tokio",2,3000,false))
+            arregloBCiudad.add(BCiudad(4,"Jalisco",3,4000,true))
         }
     }
 }

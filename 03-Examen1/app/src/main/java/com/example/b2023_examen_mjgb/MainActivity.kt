@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val botonIniciarPais = findViewById<Button>(R.id.btn_iniciar_paises)
         botonIniciarPais.setOnClickListener {
+            println("hola")
             irActividad(Actividad_Pais::class.java)
         }
     }

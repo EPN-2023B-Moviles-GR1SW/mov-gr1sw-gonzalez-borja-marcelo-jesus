@@ -3,7 +3,9 @@ package com.example.b2023_examen_mjgb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Spinner
 
 class Actualizar_Ciudad : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +26,34 @@ class Actualizar_Ciudad : AppCompatActivity() {
         inputIdPais.setText(idPais.toString())
         inputIdPais.isEnabled = false
 
+        val inputPoblacionACiudad= findViewById<EditText>(R.id.input_a_poblacion_ciudad)
+        inputPoblacionACiudad.setText(BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].poblacion.toString())
+
+        val inputEsCapitalACiudad = findViewById<CheckBox>(R.id.input_a_captal_ciudad)
+        inputEsCapitalACiudad.isChecked = BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital
+
+
+
         // lógica para actualizar Ciudad
         val botonActualizarCiudad = findViewById<Button>(R.id.btn_actualizar_ciudad)
         botonActualizarCiudad.setOnClickListener {
             val nuevoNombre = inputNombreACiudad.text.toString()
-
+            val nuevaPoblacion = inputPoblacionACiudad.getIntValueOrDefault()
+            //
+            val nuevoEsCapital = inputEsCapitalACiudad.isChecked()
+            //
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].nombre = nuevoNombre
-
+            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].poblacion = nuevaPoblacion
+            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital = nuevoEsCapital
             adaptadorCiudad.notifyDataSetChanged()
             finish()
+        }
+    }
+    fun EditText.getIntValueOrDefault(defaultValue: Int = 0): Int {
+        return try {
+            text.toString().toInt()
+        } catch (e: NumberFormatException) {
+            defaultValue
         }
     }
 }

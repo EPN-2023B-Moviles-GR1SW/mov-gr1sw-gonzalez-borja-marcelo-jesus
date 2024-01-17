@@ -58,7 +58,6 @@ class Actividad_Ciudad : AppCompatActivity() {
                 return true
             }
             R.id.mi_eliminar_ciudad ->{
-                mostrarSnackbar("${posicionItemSeleccionado}")
                 abrirDialogo()
                 return true
             }
