@@ -32,7 +32,8 @@ class Actualizar_Ciudad : AppCompatActivity() {
         val inputEsCapitalACiudad = findViewById<CheckBox>(R.id.input_a_captal_ciudad)
         inputEsCapitalACiudad.isChecked = BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital
 
-
+        val inputFechaACiudad = findViewById<EditText>(R.id.input_a_fecha_ciudad)
+        inputFechaACiudad.setText(BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].fechaFund)
 
         // lógica para actualizar Ciudad
         val botonActualizarCiudad = findViewById<Button>(R.id.btn_actualizar_ciudad)
@@ -41,10 +42,12 @@ class Actualizar_Ciudad : AppCompatActivity() {
             val nuevaPoblacion = inputPoblacionACiudad.getIntValueOrDefault()
             //
             val nuevoEsCapital = inputEsCapitalACiudad.isChecked()
+            val nuevaFechaFun = inputFechaACiudad.text.toString()
             //
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].nombre = nuevoNombre
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].poblacion = nuevaPoblacion
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital = nuevoEsCapital
+            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].fechaFund = nuevaFechaFun
             adaptadorCiudad.notifyDataSetChanged()
             finish()
         }

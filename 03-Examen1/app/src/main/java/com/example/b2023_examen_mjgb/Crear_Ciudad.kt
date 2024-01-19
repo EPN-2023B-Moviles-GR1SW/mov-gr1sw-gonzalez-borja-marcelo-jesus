@@ -31,10 +31,10 @@ class Crear_Ciudad : AppCompatActivity() {
             val nombre = findViewById<EditText>(R.id.input_nombre_ciudad).text.toString()
             val idIPais = findViewById<EditText>(R.id.input_idpais_ciudad).text.toString().toInt()
             val poblacion = findViewById<EditText>(R.id.input_poblacion_ciudad).getIntValueOrDefault()
-            //
             val esCapital = findViewById<CheckBox>(R.id.input_capital_ciudad).isChecked()
-            //
-            val nuevaCiudad = BCiudad(id, nombre, idIPais,poblacion, esCapital)
+            val fechaFundacion = findViewById<EditText>(R.id.input_fecha_ciudad).toString()
+
+            val nuevaCiudad = BCiudad(id, nombre, idIPais,poblacion, esCapital, fechaFundacion)
             BBaseDatosMemoria.arregloBCiudad.add(nuevaCiudad)
 
             setResult(Activity.RESULT_OK)
