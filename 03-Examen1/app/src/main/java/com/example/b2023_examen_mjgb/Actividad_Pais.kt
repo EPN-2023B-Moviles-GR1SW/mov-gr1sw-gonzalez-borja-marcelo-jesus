@@ -98,6 +98,6 @@ class Actividad_Pais : AppCompatActivity() {
 
     fun anadirPais(){
         val ultimoId = arreglo[arreglo.count()-1].id+1
-        irActividadConId(Crear_Pais::class.java, ultimoId)
+        irActividadConId(CrearPais::class.java, ultimoId)
     }
 }

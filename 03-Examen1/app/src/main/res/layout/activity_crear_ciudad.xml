@@ -5,7 +5,7 @@
     android:id="@+id/cl_crear_ciudad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Crear_Ciudad">
+    tools:context=".CrearCiudad">
 
     <TextView
         android:id="@+id/textView26"

@@ -23,6 +23,8 @@ private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 class Actividad_Ciudad : AppCompatActivity() {
     var arreglo = BBaseDatosMemoria.arregloBCiudad
     var posicionItemSeleccionado = -1
+    var idPaisSeleccionado = -1
+    var ciudadesDelPais: List<BCiudad> = emptyList()
 
     override fun onCreateContextMenu(
         menu: ContextMenu?,
@@ -42,19 +44,17 @@ class Actividad_Ciudad : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.mi_editar_ciudad->{
-                val idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-                val ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
-                var idAEliminar = ciudadesDelPais[posicionItemSeleccionado].id
-                var indxArreglo = encontrarIndicePorId(arreglo, idAEliminar)
+                idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
+                ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
+                var idAEditar= ciudadesDelPais[posicionItemSeleccionado].id
+                var indxArreglo = encontrarIndicePorId(arreglo, idAEditar)
 
                 // Crear intent con la nueva ciudad
-                val intent = Intent(this, Actualizar_Ciudad::class.java)
+                val intent = Intent(this, ActualizarCiudad::class.java)
                 intent.putExtra("ID_CIUDAD", indxArreglo)
                 intent.putExtra("ID_PAIS", idPaisSeleccionado)
                 // para actualizar la lista
                 resultLauncher.launch(intent)
-
-                mostrarSnackbar("${indxArreglo}")
                 return true
             }
             R.id.mi_eliminar_ciudad ->{
@@ -75,8 +75,6 @@ class Actividad_Ciudad : AppCompatActivity() {
 
     fun abrirDialogo() {
         val builder = AlertDialog.Builder(this)
-        val idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-        val ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
         var idAEliminar = ciudadesDelPais[posicionItemSeleccionado].id
         var indxArreglo = encontrarIndicePorId(arreglo, idAEliminar)
 
@@ -84,9 +82,9 @@ class Actividad_Ciudad : AppCompatActivity() {
         builder.setPositiveButton("Aceptar",
             DialogInterface.OnClickListener{ dialog, which ->
                 arreglo.removeAt(indxArreglo)
-                //
+
                 actualizarLista()
-                //
+
                 mostrarSnackbar("Eliminar Aceptado")
             })
         builder.setNegativeButton("Cancelar",null)
@@ -103,8 +101,8 @@ class Actividad_Ciudad : AppCompatActivity() {
         return -1 // Devolver -1 si no se encuentra el ID en el arreglo
     }
     fun actualizarLista() {
-        val idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
-        val ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
+        idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
+        ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
         adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, ciudadesDelPais)
         val listView = findViewById<ListView>(R.id.lv_list_ciudad)
         listView.adapter = adaptadorCiudad
@@ -114,10 +112,10 @@ class Actividad_Ciudad : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actividad_ciudad)
-        //
-        val idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-        val ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
-        //
+
+        idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
+        ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
+
         val listView = findViewById<ListView>(R.id.lv_list_ciudad)
         adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, ciudadesDelPais)
         listView.adapter = adaptadorCiudad
@@ -142,15 +140,16 @@ class Actividad_Ciudad : AppCompatActivity() {
     }
 
     fun anadirCiudad(){
-        val idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
+        idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
         val nuevaCiudadId = arreglo[arreglo.count()-1].id+1
 
         // Crear intent con la nueva ciudad
-        val intent = Intent(this, Crear_Ciudad::class.java)
+        val intent = Intent(this, CrearCiudad::class.java)
         intent.putExtra("ID_CIUDAD", nuevaCiudadId)
         intent.putExtra("ID_PAIS", idPaisSeleccionado)
         // para actualizar la lista
         resultLauncher.launch(intent)
     }
+
 
 }

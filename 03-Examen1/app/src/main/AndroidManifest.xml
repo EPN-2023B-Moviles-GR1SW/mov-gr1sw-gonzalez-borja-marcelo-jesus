@@ -13,16 +13,16 @@
         android:theme="@style/Theme.Design"
         tools:targetApi="31">
         <activity
-            android:name=".Actualizar_Ciudad"
+            android:name=".ActualizarCiudad"
             android:exported="false" />
         <activity
             android:name=".Actualizar_Pais"
             android:exported="false" />
         <activity
-            android:name=".Crear_Ciudad"
+            android:name=".CrearCiudad"
             android:exported="false" />
         <activity
-            android:name=".Crear_Pais"
+            android:name=".CrearPais"
             android:exported="false" />
         <activity
             android:name=".Actividad_Ciudad"

@@ -1,13 +1,13 @@
 package com.example.b2023_examen_mjgb
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.Spinner
 
-class Actualizar_Ciudad : AppCompatActivity() {
+class ActualizarCiudad : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_ciudad)
@@ -40,14 +40,14 @@ class Actualizar_Ciudad : AppCompatActivity() {
         botonActualizarCiudad.setOnClickListener {
             val nuevoNombre = inputNombreACiudad.text.toString()
             val nuevaPoblacion = inputPoblacionACiudad.getIntValueOrDefault()
-            //
             val nuevoEsCapital = inputEsCapitalACiudad.isChecked()
             val nuevaFechaFun = inputFechaACiudad.text.toString()
-            //
+
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].nombre = nuevoNombre
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].poblacion = nuevaPoblacion
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital = nuevoEsCapital
             BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].fechaFund = nuevaFechaFun
+            setResult(Activity.RESULT_OK)
             adaptadorCiudad.notifyDataSetChanged()
             finish()
         }

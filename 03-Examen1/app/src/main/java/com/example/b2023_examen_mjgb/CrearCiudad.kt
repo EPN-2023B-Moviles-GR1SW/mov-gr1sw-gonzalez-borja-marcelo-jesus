@@ -1,16 +1,15 @@
 package com.example.b2023_examen_mjgb
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.ListView
-import android.widget.Spinner
 
-class Crear_Ciudad : AppCompatActivity() {
+class CrearCiudad : AppCompatActivity() {
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_ciudad)
@@ -32,11 +31,10 @@ class Crear_Ciudad : AppCompatActivity() {
             val idIPais = findViewById<EditText>(R.id.input_idpais_ciudad).text.toString().toInt()
             val poblacion = findViewById<EditText>(R.id.input_poblacion_ciudad).getIntValueOrDefault()
             val esCapital = findViewById<CheckBox>(R.id.input_capital_ciudad).isChecked()
-            val fechaFundacion = findViewById<EditText>(R.id.input_fecha_ciudad).toString()
+            val fechaFundacion = findViewById<EditText>(R.id.input_fecha_ciudad).text.toString()
 
             val nuevaCiudad = BCiudad(id, nombre, idIPais,poblacion, esCapital, fechaFundacion)
             BBaseDatosMemoria.arregloBCiudad.add(nuevaCiudad)
-
             setResult(Activity.RESULT_OK)
             adaptadorCiudad.notifyDataSetChanged()
             finish()
