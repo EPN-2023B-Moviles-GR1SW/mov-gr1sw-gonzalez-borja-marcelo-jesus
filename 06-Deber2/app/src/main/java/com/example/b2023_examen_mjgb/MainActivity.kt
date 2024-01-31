@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //Base de datos sqlite
         EBaseDeDatos.tablaPais = ESqliteHelperPais(this)
+        EBaseDeDatos.tablaCiudad = ESqliteHelperCiudad(this)
         val botonIniciarPais = findViewById<Button>(R.id.btn_iniciar_paises)
         botonIniciarPais.setOnClickListener {
             irActividad(Actividad_Pais::class.java)
