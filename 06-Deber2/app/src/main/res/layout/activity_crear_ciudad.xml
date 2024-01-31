@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_crear_ciudad"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CrearCiudad">
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capital:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_capital_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/input_capital_ciudad" />
+
+    <EditText
+        android:id="@+id/input_fecha_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Fecha de Fundacion"
+        android:inputType="datetime|date"
+        app:layout_constraintBottom_toTopOf="@+id/input_capital_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_capital_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_capital_ciudad" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha Fundacion"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_fecha_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView26"
+        app:layout_constraintStart_toStartOf="@+id/textView26"
+        app:layout_constraintTop_toTopOf="@+id/input_fecha_ciudad" />
+
+    <EditText
+        android:id="@+id/input_poblacion_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Ingrese la Poblacion"
+        app:layout_constraintBottom_toTopOf="@+id/input_fecha_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_fecha_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_fecha_ciudad" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poblacion:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_poblacion_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView25"
+        app:layout_constraintStart_toStartOf="@+id/textView25"
+        app:layout_constraintTop_toTopOf="@+id/input_poblacion_ciudad" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="592dp"
+        android:text="INGRESE SU CIUDAD"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_crear_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/btn_crear_ciudad"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/btn_crear_ciudad" />
+
+    <Button
+        android:id="@+id/btn_crear_ciudad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREAR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_id_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/input_id_ciudad" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_nombre_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/textView23"
+        app:layout_constraintStart_toStartOf="@+id/textView23"
+        app:layout_constraintTop_toTopOf="@+id/input_nombre_ciudad" />
+
+    <EditText
+        android:id="@+id/input_id_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="ID"
+        app:layout_constraintBottom_toTopOf="@+id/input_nombre_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_nombre_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_nombre_ciudad" />
+
+    <EditText
+        android:id="@+id/input_nombre_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Ingrese el Nombre"
+        app:layout_constraintBottom_toTopOf="@+id/input_poblacion_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_poblacion_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_poblacion_ciudad" />
+
+    <EditText
+        android:id="@+id/input_idpais_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="60dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="ID Pais"
+        app:layout_constraintBottom_toTopOf="@+id/btn_crear_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/btn_crear_ciudad"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="@+id/btn_crear_ciudad" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="ID Pais:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/input_idpais_ciudad"
+        app:layout_constraintEnd_toStartOf="@+id/input_idpais_ciudad"
+        app:layout_constraintTop_toTopOf="@+id/input_idpais_ciudad"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <CheckBox
+        android:id="@+id/input_capital_ciudad"
+        android:layout_width="228dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:text="Es la Capital?"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/input_idpais_ciudad"
+        app:layout_constraintEnd_toEndOf="@+id/input_idpais_ciudad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_idpais_ciudad" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
