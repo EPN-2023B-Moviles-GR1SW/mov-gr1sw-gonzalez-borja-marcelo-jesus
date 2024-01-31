@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -33,10 +34,14 @@ class CrearCiudad : AppCompatActivity() {
             val esCapital = findViewById<CheckBox>(R.id.input_capital_ciudad).isChecked()
             val fechaFundacion = findViewById<EditText>(R.id.input_fecha_ciudad).text.toString()
 
-            val nuevaCiudad = BCiudad(id, nombre, idIPais,poblacion, esCapital, fechaFundacion)
-            BBaseDatosMemoria.arregloBCiudad.add(nuevaCiudad)
-            setResult(Activity.RESULT_OK)
-            adaptadorCiudad.notifyDataSetChanged()
+            val respuesta = EBaseDeDatos.tablaCiudad!!.crearCiudad(
+                nombre,idIPais,poblacion,esCapital,fechaFundacion
+            )
+            if (respuesta){
+                Log.d("DEBUG", "esCapital: $esCapital")
+                adaptadorCiudad.notifyDataSetChanged()
+                setResult(Activity.RESULT_OK)
+            }
             finish()
         }
     }

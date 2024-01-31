@@ -4,9 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-
 class ESqliteHelperPais(contexto: Context?) :
-    SQLiteOpenHelper(contexto, "moviles", null, 1) {
+    SQLiteOpenHelper(contexto, "dbPais", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val scriptSQLCrearTablaPais =
             """
@@ -115,5 +114,38 @@ class ESqliteHelperPais(contexto: Context?) :
         resultadoConsultaLectura.close()
         baseDatosLectura.close()
         return usuarioEncontrado
+    }
+
+    fun consultarPaises(): List<BPais> {
+        val baseDatosLectura = readableDatabase
+        val scriptConsultaLectura = """
+        SELECT * FROM PAIS
+    """.trimIndent()
+        val resultadoConsultaLectura = baseDatosLectura.rawQuery(scriptConsultaLectura, null)
+        val listaPaises = mutableListOf<BPais>()
+
+        if (resultadoConsultaLectura.moveToFirst()) {
+            do {
+                val id = resultadoConsultaLectura.getInt(0)
+                val nombre = resultadoConsultaLectura.getString(1)
+                val capital = resultadoConsultaLectura.getString(2)
+                val poblacion = resultadoConsultaLectura.getString(3)
+                val tasaCrecimiento = resultadoConsultaLectura.getString(4)
+
+                val pais = BPais(id, nombre, capital, poblacion.toInt(), tasaCrecimiento.toDouble())
+                listaPaises.add(pais)
+
+            } while (resultadoConsultaLectura.moveToNext())
+        }
+        resultadoConsultaLectura.close()
+        baseDatosLectura.close()
+        return listaPaises
+    }
+
+    fun eliminarTodosPais(): Boolean {
+        val conexionEscritura = writableDatabase
+        val resultadoEliminacion = conexionEscritura.delete("PAIS", null, null)
+        conexionEscritura.close()
+        return resultadoEliminacion != -1
     }
 }

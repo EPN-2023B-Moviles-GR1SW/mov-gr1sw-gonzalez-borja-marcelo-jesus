@@ -3,6 +3,7 @@ package com.example.b2023_examen_mjgb
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -11,29 +12,31 @@ class ActualizarCiudad : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_ciudad)
-
-        val idCiudadArreglo= intent.getIntExtra("ID_CIUDAD",-1)
+        val posicion= intent.getIntExtra("ID_CIUDAD",-1)
         val idPais= intent.getIntExtra("ID_PAIS",-1)
 
+        val arregloCiudades = EBaseDeDatos.tablaCiudad!!.consultarCiudades()
+        val idCiudad = arregloCiudades[posicion].id
+
         val inputIdCiudad = findViewById<EditText>(R.id.input_a_id_ciudad)
-        inputIdCiudad.setText(BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].id.toString())
+        inputIdCiudad.setText(idCiudad.toString())
         inputIdCiudad.isEnabled = false
 
         val inputNombreACiudad= findViewById<EditText>(R.id.input_a_nombre_ciudad)
-        inputNombreACiudad.setText(BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].nombre)
+        inputNombreACiudad.setText(arregloCiudades[posicion].nombre)
 
         val inputIdPais = findViewById<EditText>(R.id.input_a_idPais_ciudad)
         inputIdPais.setText(idPais.toString())
         inputIdPais.isEnabled = false
 
         val inputPoblacionACiudad= findViewById<EditText>(R.id.input_a_poblacion_ciudad)
-        inputPoblacionACiudad.setText(BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].poblacion.toString())
+        inputPoblacionACiudad.setText(arregloCiudades[posicion].poblacion.toString())
 
         val inputEsCapitalACiudad = findViewById<CheckBox>(R.id.input_a_captal_ciudad)
-        inputEsCapitalACiudad.isChecked = BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital
-
+        inputEsCapitalACiudad.isChecked = arregloCiudades[posicion].esCapital
+        Log.d("DEBUG", "esCapital: "+arregloCiudades[posicion].esCapital)
         val inputFechaACiudad = findViewById<EditText>(R.id.input_a_fecha_ciudad)
-        inputFechaACiudad.setText(BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].fechaFund)
+        inputFechaACiudad.setText(arregloCiudades[posicion].fechaFund)
 
         // lógica para actualizar Ciudad
         val botonActualizarCiudad = findViewById<Button>(R.id.btn_actualizar_ciudad)
@@ -43,12 +46,13 @@ class ActualizarCiudad : AppCompatActivity() {
             val nuevoEsCapital = inputEsCapitalACiudad.isChecked()
             val nuevaFechaFun = inputFechaACiudad.text.toString()
 
-            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].nombre = nuevoNombre
-            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].poblacion = nuevaPoblacion
-            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].esCapital = nuevoEsCapital
-            BBaseDatosMemoria.arregloBCiudad[idCiudadArreglo].fechaFund = nuevaFechaFun
-            setResult(Activity.RESULT_OK)
-            adaptadorCiudad.notifyDataSetChanged()
+            val respuesta = EBaseDeDatos.tablaCiudad!!.actualizarCiudadFormulario(
+                nuevoNombre,idPais,nuevaPoblacion,nuevoEsCapital,nuevaFechaFun,idCiudad
+            )
+            if (respuesta){
+                setResult(Activity.RESULT_OK)
+                adaptadorCiudad.notifyDataSetChanged()
+            }
             finish()
         }
     }

@@ -4,8 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-class ESqliteHelperCiudad (contexto: Context?):
-    SQLiteOpenHelper(contexto, "moviles", null,1){
+class ESqliteHelperCiudad(contexto: Context?):
+    SQLiteOpenHelper(contexto, "dbCiudad", null,1){
     override fun onCreate(db: SQLiteDatabase?) {
         val scriptSQLCrearTablaCIudad =
             """
@@ -14,7 +14,7 @@ class ESqliteHelperCiudad (contexto: Context?):
                 nombre VARCHAR(50),
                 idPaisCorresponde INTEGER,
                 poblacion INTEGER,
-                esCapital BOOLEAN,
+                esCapital BOOLEAN CHECK(esCapital IN(0,1)),
                 fechaFundacion VARCHAR(15)
                 )
             """.trimIndent()
@@ -121,5 +121,32 @@ class ESqliteHelperCiudad (contexto: Context?):
         resultadoConsultaLectura.close()
         baseDatosLectura.close()
         return usuarioEncontrado
+    }
+
+    fun consultarCiudades(): List<BCiudad> {
+        val baseDatosLectura = readableDatabase
+        val scriptConsultaLectura = """
+        SELECT * FROM CIUDAD
+    """.trimIndent()
+        val resultadoConsultaLectura = baseDatosLectura.rawQuery(scriptConsultaLectura, null)
+        val listaCiudades = mutableListOf<BCiudad>()
+
+        if (resultadoConsultaLectura.moveToFirst()) {
+            do {
+                val id = resultadoConsultaLectura.getInt(0) // Indice
+                val nombre = resultadoConsultaLectura.getString(1)
+                val idPaisCorresponde = resultadoConsultaLectura.getString(2)
+                val poblacion = resultadoConsultaLectura.getString(3)
+                val esCapital = resultadoConsultaLectura.getString(4)
+                val fechaFund = resultadoConsultaLectura.getString(5)
+
+                val ciudad = BCiudad(id, nombre, idPaisCorresponde.toInt(), poblacion.toInt(), esCapital.toBoolean(),fechaFund )
+                listaCiudades.add(ciudad)
+
+            } while (resultadoConsultaLectura.moveToNext())
+        }
+        resultadoConsultaLectura.close()
+        baseDatosLectura.close()
+        return listaCiudades
     }
 }

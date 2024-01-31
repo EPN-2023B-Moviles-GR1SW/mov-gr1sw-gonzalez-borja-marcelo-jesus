@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 lateinit var adaptadorPais: ArrayAdapter<BPais>
 class Actividad_Pais : AppCompatActivity() {
     val arreglo = BBaseDatosMemoria.arregloBPais
+    val arregloSQL = EBaseDeDatos.tablaPais!!.consultarPaises()
     var posicionItemSeleccionado = -1
 
     override fun onCreateContextMenu(
@@ -45,7 +46,7 @@ class Actividad_Pais : AppCompatActivity() {
                 return true
             }
             R.id.mi_ver_ciudades ->{
-                val idPaisSeleccionado = arreglo[posicionItemSeleccionado].id
+                val idPaisSeleccionado = arregloSQL[posicionItemSeleccionado].id
                 irActividadConId(Actividad_Ciudad::class.java, idPaisSeleccionado)
                 return true
             }
@@ -68,12 +69,17 @@ class Actividad_Pais : AppCompatActivity() {
 
     fun abrirDialogo() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Desea Eliminar "+ arreglo[posicionItemSeleccionado])
+        val idPais = arregloSQL[posicionItemSeleccionado].id
+        val pais = EBaseDeDatos.tablaPais!!.consultarPaisPorID(idPais)
+        builder.setTitle("Desea Eliminar " + pais.nombre)
         builder.setPositiveButton("Aceptar",
             DialogInterface.OnClickListener{dialog, which ->
-                arreglo.removeAt(posicionItemSeleccionado)
-                adaptadorPais.notifyDataSetChanged()
-                mostrarSnackbar("Eliminar Aceptado")
+                val respuesta = EBaseDeDatos.tablaPais!!.eliminarPaisFormulario(idPais)
+                if (respuesta){
+                    mostrarSnackbar("Pais Eliminado")
+                    adaptadorPais.notifyDataSetChanged()
+                }
+
             })
         builder.setNegativeButton("Cancelar",null)
         val dialogo = builder.create()
@@ -85,7 +91,7 @@ class Actividad_Pais : AppCompatActivity() {
         setContentView(R.layout.activity_actividad_pais)
 
         val listView = findViewById<ListView>(R.id.lv_list_paises)
-        adaptadorPais = ArrayAdapter(this, android.R.layout.simple_list_item_1, arreglo)
+        adaptadorPais = ArrayAdapter(this, android.R.layout.simple_list_item_1, arregloSQL)
         listView.adapter = adaptadorPais
         adaptadorPais.notifyDataSetChanged()
 
@@ -97,7 +103,7 @@ class Actividad_Pais : AppCompatActivity() {
     }
 
     fun anadirPais(){
-        val ultimoId = arreglo[arreglo.count()-1].id+1
+        val ultimoId = arregloSQL[arregloSQL.count()-1].id+1
         irActividadConId(CrearPais::class.java, ultimoId)
     }
 }

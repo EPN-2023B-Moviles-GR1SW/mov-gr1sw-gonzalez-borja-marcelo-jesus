@@ -13,6 +13,7 @@ class CrearPais : AppCompatActivity() {
         setContentView(R.layout.activity_crear_pais)
         val idPais= intent.getIntExtra("ID_PAIS",-1)
         val inputIdPais = findViewById<EditText>(R.id.input_id_pais)
+
         inputIdPais.setText(idPais.toString())
         inputIdPais.isEnabled = false
         // logica para crear Pais
@@ -23,9 +24,13 @@ class CrearPais : AppCompatActivity() {
             val capital = findViewById<EditText>(R.id.input_capital_pais).text.toString()
             val poblacion = findViewById<EditText>(R.id.input_poblacion_pais).getIntValueOrDefault()
             val tasa = findViewById<EditText>(R.id.input_tasa_pais).getDoubleValueOrDefault()
-            val nuevoPais = BPais(id, nombre, capital,poblacion,tasa)
-            BBaseDatosMemoria.arregloBPais.add(nuevoPais)
-            adaptadorPais.notifyDataSetChanged()
+
+            val respuesta = EBaseDeDatos.tablaPais!!.crearPais(
+                nombre,capital,poblacion,tasa
+            )
+            if (respuesta){
+                adaptadorPais.notifyDataSetChanged()
+            }
             finish()
         }
     }

@@ -22,6 +22,7 @@ lateinit var adaptadorCiudad: ArrayAdapter<BCiudad>
 private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 class Actividad_Ciudad : AppCompatActivity() {
     var arreglo = BBaseDatosMemoria.arregloBCiudad
+    val arregloSQL = EBaseDeDatos.tablaCiudad!!.consultarCiudades()
     var posicionItemSeleccionado = -1
     var idPaisSeleccionado = -1
     var ciudadesDelPais: List<BCiudad> = emptyList()
@@ -45,9 +46,9 @@ class Actividad_Ciudad : AppCompatActivity() {
         return when (item.itemId){
             R.id.mi_editar_ciudad->{
                 idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-                ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
-                var idAEditar= ciudadesDelPais[posicionItemSeleccionado].id
-                var indxArreglo = encontrarIndicePorId(arreglo, idAEditar)
+                ciudadesDelPais = arregloSQL.filter { it.idPaisCorresponde == idPaisSeleccionado }
+                var idCiudad= ciudadesDelPais[posicionItemSeleccionado].id
+                var indxArreglo = encontrarIndicePorId(arregloSQL, idCiudad)
 
                 // Crear intent con la nueva ciudad
                 val intent = Intent(this, ActualizarCiudad::class.java)
@@ -75,17 +76,18 @@ class Actividad_Ciudad : AppCompatActivity() {
 
     fun abrirDialogo() {
         val builder = AlertDialog.Builder(this)
-        var idAEliminar = ciudadesDelPais[posicionItemSeleccionado].id
-        var indxArreglo = encontrarIndicePorId(arreglo, idAEliminar)
-
-        builder.setTitle("Desea Eliminar "+ arreglo[indxArreglo])
+        var idCiudad = ciudadesDelPais[posicionItemSeleccionado].id
+        var indxArreglo = encontrarIndicePorId(arregloSQL, idCiudad)
+        val ciudad = EBaseDeDatos.tablaCiudad!!.consultarCiudadPorID(idCiudad)
+        builder.setTitle("Desea Eliminar "+ ciudad.id + ciudad.idPaisCorresponde +ciudad.nombre)
         builder.setPositiveButton("Aceptar",
             DialogInterface.OnClickListener{ dialog, which ->
-                arreglo.removeAt(indxArreglo)
-
-                actualizarLista()
-
-                mostrarSnackbar("Eliminar Aceptado")
+                val respuesta = EBaseDeDatos.tablaCiudad!!.eliminarCiudadFormulario(idCiudad)
+                if (respuesta){
+                    mostrarSnackbar("Pais Eliminado")
+                    actualizarLista()
+                    adaptadorPais.notifyDataSetChanged()
+                }
             })
         builder.setNegativeButton("Cancelar",null)
         val dialogo = builder.create()
@@ -102,7 +104,7 @@ class Actividad_Ciudad : AppCompatActivity() {
     }
     fun actualizarLista() {
         idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
-        ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
+        ciudadesDelPais = arregloSQL.filter { it.idPaisCorresponde == idPaisSeleccionado }
         adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, ciudadesDelPais)
         val listView = findViewById<ListView>(R.id.lv_list_ciudad)
         listView.adapter = adaptadorCiudad
@@ -114,7 +116,8 @@ class Actividad_Ciudad : AppCompatActivity() {
         setContentView(R.layout.activity_actividad_ciudad)
 
         idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-        ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
+        ciudadesDelPais = arregloSQL.filter { it.idPaisCorresponde == idPaisSeleccionado }
+
 
         val listView = findViewById<ListView>(R.id.lv_list_ciudad)
         adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, ciudadesDelPais)
@@ -141,7 +144,7 @@ class Actividad_Ciudad : AppCompatActivity() {
 
     fun anadirCiudad(){
         idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
-        val nuevaCiudadId = arreglo[arreglo.count()-1].id+1
+        val nuevaCiudadId = arregloSQL[arregloSQL.count()-1].id+1
 
         // Crear intent con la nueva ciudad
         val intent = Intent(this, CrearCiudad::class.java)

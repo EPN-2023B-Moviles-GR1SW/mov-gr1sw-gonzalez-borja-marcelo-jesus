@@ -10,23 +10,25 @@ class Actualizar_Pais : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_pais)
         val posicion = intent.getIntExtra("ID_PAIS",-1)
-        val idPais = BBaseDatosMemoria.arregloBPais[posicion].id
+        val arregloPaises = EBaseDeDatos.tablaPais!!.consultarPaises()
+
+        val idPais = arregloPaises[posicion].id
 
         val inputIdAPais = findViewById<EditText>(R.id.input_a_id_pais)
         inputIdAPais.setText(idPais.toString())
         inputIdAPais.isEnabled = false
 
         val inputNombreAPais = findViewById<EditText>(R.id.input_a_nombre_pais)
-        inputNombreAPais.setText(BBaseDatosMemoria.arregloBPais[posicion].nombre)
+        inputNombreAPais.setText(arregloPaises[posicion].nombre)
 
         val inputCapitalAPais = findViewById<EditText>(R.id.input_a_capital_pais)
-        inputCapitalAPais.setText(BBaseDatosMemoria.arregloBPais[posicion].capital)
+        inputCapitalAPais.setText(arregloPaises[posicion].capital)
 
         val inputPoblacionAPais = findViewById<EditText>(R.id.input_a_poblacion_pais)
-        inputPoblacionAPais.setText(BBaseDatosMemoria.arregloBPais[posicion].poblacion.toString())
+        inputPoblacionAPais.setText(arregloPaises[posicion].poblacion.toString())
 
         val inputTasaAPais = findViewById<EditText>(R.id.input_a_tasa_pais)
-        inputTasaAPais.setText(BBaseDatosMemoria.arregloBPais[posicion].tasaCrecimiento.toString())
+        inputTasaAPais.setText(arregloPaises[posicion].tasaCrecimiento.toString())
 
         // lógica para actualizar Pais
         val botonActualizarPais = findViewById<Button>(R.id.btn_actualizar_pais)
@@ -35,11 +37,13 @@ class Actualizar_Pais : AppCompatActivity() {
             val nuevaCapital = inputCapitalAPais.text.toString()
             val nuevaPoblacion = inputPoblacionAPais.getIntValueOrDefault()
             val nuevaTasa = inputTasaAPais.getDoubleValueOrDefault()
-            BBaseDatosMemoria.arregloBPais[posicion].nombre = nuevoNombre
-            BBaseDatosMemoria.arregloBPais[posicion].capital = nuevaCapital
-            BBaseDatosMemoria.arregloBPais[posicion].poblacion = nuevaPoblacion
-            BBaseDatosMemoria.arregloBPais[posicion].tasaCrecimiento = nuevaTasa
-            adaptadorPais.notifyDataSetChanged()
+            val respuesta = EBaseDeDatos.tablaPais!!.actualizarPaisFormulario(
+                nuevoNombre,nuevaCapital,nuevaPoblacion,nuevaTasa,idPais
+            )
+            if (respuesta){
+                adaptadorPais.notifyDataSetChanged()
+            }
+
             finish()
         }
     }
