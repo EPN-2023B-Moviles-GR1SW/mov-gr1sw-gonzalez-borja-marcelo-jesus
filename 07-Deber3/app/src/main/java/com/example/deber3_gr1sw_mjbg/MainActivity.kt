@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +13,26 @@ class MainActivity : AppCompatActivity() {
         val botonIniciarToDoList = findViewById<Button>(R.id.btn_ir_app)
         botonIniciarToDoList.setOnClickListener {
             irActividad(FRecyclerViewProyectos::class.java)
+        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.Hoy)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.Hoy -> {
+                    irActividad(MainActivity::class.java)
+                    true
+                }
+                R.id.Bandeja -> {
+                    irActividad(FRecyclerViewTareas::class.java)
+                    true
+                }
+                R.id.Explorar -> {
+                    irActividad(FRecyclerViewProyectos::class.java)
+                    true
+                }
+                else -> false
+            }
         }
     }
 

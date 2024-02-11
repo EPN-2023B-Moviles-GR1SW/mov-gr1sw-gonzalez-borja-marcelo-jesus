@@ -17,11 +17,23 @@
             android:layout_width="match_parent"
             android:layout_height="130dp">
 
+            <Button
+                android:id="@+id/btn_ir_tareas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ir Tareas"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.804" />
+
             <TextView
                 android:id="@+id/tv_nombre_proyecto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="4dp"
                 android:text="Nombre:"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgv_num"
@@ -33,7 +45,7 @@
                 android:id="@+id/tv_numero_tareas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="188dp"
                 android:text="N. Tareas"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_nombre_proyecto"
@@ -45,24 +57,12 @@
                 android:id="@+id/btn_agregar_tarea_proyecto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="8dp"
                 android:text="Agrager Tarea"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_ir_tareas"
                 app:layout_constraintStart_toEndOf="@+id/btn_ir_tareas"
                 app:layout_constraintTop_toTopOf="@+id/btn_ir_tareas"
                 app:layout_constraintVertical_bias="0.0" />
-
-            <Button
-                android:id="@+id/btn_ir_tareas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ir Tareas"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.22"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.804" />
 
             <ImageView
                 android:id="@+id/imgv_num"

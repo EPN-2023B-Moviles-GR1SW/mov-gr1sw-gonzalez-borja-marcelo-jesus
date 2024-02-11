@@ -9,6 +9,7 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FRecyclerViewTareas : AppCompatActivity() {
     val arreglo = BBaseDatosMemoria.arregloBTareas
@@ -31,6 +32,25 @@ class FRecyclerViewTareas : AppCompatActivity() {
         botonAgregar.setOnClickListener {
             aumentarTotalTareas()
             crearTarea()
+        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.Bandeja)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.Hoy -> {
+                    irActividad(MainActivity::class.java)
+                    true
+                }R.id.Bandeja -> {
+                irActividad(FRecyclerViewTareas::class.java)
+                true
+            }
+                R.id.Explorar -> {
+                    irActividad(FRecyclerViewProyectos::class.java)
+                    true
+                }
+                else -> false
+            }
         }
     }
 
