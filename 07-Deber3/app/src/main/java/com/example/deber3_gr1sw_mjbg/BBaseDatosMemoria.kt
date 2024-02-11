@@ -19,14 +19,14 @@ class BBaseDatosMemoria {
 
         val arregloBTareas= arrayListOf<BTareas>()
         init {
-            arregloBTareas.add(BTareas(1, "Universidad",
-                "tareas de universidad", "sabado"))
-            arregloBTareas.add(BTareas(2, "Trabajo",
-                "tareas del trabajo", "20 de Marzo"))
-            arregloBTareas.add(BTareas(3, "Cursos",
-                "tareas de los cursos", "domingo"))
-            arregloBTareas.add(BTareas(4, "Otros",
-                "tareas de otrsas cosas", "15 de Marzo"))
+            arregloBTareas.add(BTareas(1, "Tarea 1",
+                "Información de la Tarea 1", "sabado"))
+            arregloBTareas.add(BTareas(2, "Tarea 2",
+                "Información de la Tarea 2", "20 de Marzo"))
+            arregloBTareas.add(BTareas(3, "Tarea 3",
+                "Información de la Tarea 3", "domingo"))
+            arregloBTareas.add(BTareas(4, "Tarea 4",
+                "Información de la Tarea 4", "15 de Marzo"))
         }
 
 

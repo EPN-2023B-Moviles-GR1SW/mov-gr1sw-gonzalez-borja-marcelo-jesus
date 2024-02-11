@@ -41,7 +41,6 @@ class FRecyclerAdaptadorProyectos (
         fun anadirTarea(){
             numeroTareas = numeroTareas + 1
             tareasPTextView.text = numeroTareas.toString()
-            contexto.aumentarTotalTareas()
         }
     }
 

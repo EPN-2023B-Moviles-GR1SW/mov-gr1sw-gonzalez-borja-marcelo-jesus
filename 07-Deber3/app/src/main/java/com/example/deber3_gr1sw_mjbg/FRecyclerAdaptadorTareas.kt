@@ -29,12 +29,6 @@ class FRecyclerAdaptadorTareas (
             fechaView = view.findViewById(R.id.tv_fecha_tarea)
             chkTareaButton = view.findViewById(R.id.chk_tarea)
         }
-        fun restarTarea(){
-            contexto.disminuirTotalTareas()
-        }
-        fun sumarTarea(){
-            contexto.aumentarTotalTareas()
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):

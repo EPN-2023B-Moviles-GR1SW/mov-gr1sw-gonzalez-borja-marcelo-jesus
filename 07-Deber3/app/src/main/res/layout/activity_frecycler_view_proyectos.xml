@@ -126,7 +126,7 @@
         app:srcCompat="@drawable/filter_img" />
 
     <TextView
-        android:id="@+id/tv_total_tareas"
+        android:id="@+id/tv_total_proyectos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -138,27 +138,15 @@
         app:layout_constraintStart_toStartOf="@+id/rv_proyectos" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:text="Tareas:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_total_tareas"
-        app:layout_constraintEnd_toStartOf="@+id/tv_total_tareas"
-        app:layout_constraintTop_toTopOf="@+id/tv_total_tareas"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="68dp"
         android:text="Mis Proyectos"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView9"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/textView9"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_total_proyectos"
+        app:layout_constraintEnd_toStartOf="@+id/tv_total_proyectos"
+        app:layout_constraintTop_toTopOf="@+id/tv_total_proyectos"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
@@ -166,9 +154,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_total_tareas"
-        app:layout_constraintStart_toEndOf="@+id/tv_total_tareas"
-        app:layout_constraintTop_toTopOf="@+id/tv_total_tareas"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_total_proyectos"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_proyectos"
+        app:layout_constraintTop_toTopOf="@+id/tv_total_proyectos"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/lock_img" />
 
@@ -197,16 +185,18 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-
-    <ImageView
-        android:id="@+id/imageView3"
+    <ImageButton
+        android:id="@+id/img_add_proyectos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="addproject"
         app:layout_constraintEnd_toEndOf="@+id/rv_proyectos"
-        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/rv_proyectos"
         app:layout_constraintTop_toBottomOf="@+id/rv_proyectos"
         app:srcCompat="@drawable/add_img" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
