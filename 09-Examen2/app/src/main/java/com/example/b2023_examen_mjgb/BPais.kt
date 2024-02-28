@@ -7,8 +7,9 @@ class BPais(
     var poblacion: Int?,
     var tasaCrecimiento: Double?,
     var ciudades: List<BCiudad>?
-){
-    constructor(): this(null,null,null,0,0.0,null)
+) {
+    constructor() : this(null, null, null, 0, 0.0, null)
+
     override fun toString(): String {
         return "${nombre}"
     }

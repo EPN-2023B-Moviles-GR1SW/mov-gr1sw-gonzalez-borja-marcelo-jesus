@@ -19,59 +19,60 @@ class Actualizar_Pais : AppCompatActivity() {
         val inputTasaAPais = findViewById<EditText>(R.id.input_a_tasa_pais)
 
 
-
         var pais: BPais? = null
         if (idPais != null) {
-           consultarPaisId(idPais, object : PaisCallback{
-               override fun onCallback(result: BPais) {
-                   pais = result
-                   inputNombreAPais.setText(pais!!.nombre)
-                   inputCapitalAPais.setText(pais!!.capital)
-                   inputPoblacionAPais.setText(pais!!.poblacion.toString())
-                   inputTasaAPais.setText(pais!!.tasaCrecimiento.toString())
+            consultarPaisId(idPais, object : PaisCallback {
+                override fun onCallback(result: BPais) {
+                    pais = result
+                    inputNombreAPais.setText(pais!!.nombre)
+                    inputCapitalAPais.setText(pais!!.capital)
+                    inputPoblacionAPais.setText(pais!!.poblacion.toString())
+                    inputTasaAPais.setText(pais!!.tasaCrecimiento.toString())
 
 
-                   // logica
-                   val botonActualizarPais = findViewById<Button>(R.id.btn_actualizar_pais)
-                   botonActualizarPais.setOnClickListener {
-                       pais.let {
-                       it?.nombre = inputNombreAPais.text.toString()
-                       it?.capital = inputCapitalAPais.text.toString()
-                       it?.poblacion = inputPoblacionAPais.getIntValueOrDefault()
-                       it?.tasaCrecimiento= inputTasaAPais.getDoubleValueOrDefault()
+                    // logica
+                    val botonActualizarPais = findViewById<Button>(R.id.btn_actualizar_pais)
+                    botonActualizarPais.setOnClickListener {
+                        pais.let {
+                            it?.nombre = inputNombreAPais.text.toString()
+                            it?.capital = inputCapitalAPais.text.toString()
+                            it?.poblacion = inputPoblacionAPais.getIntValueOrDefault()
+                            it?.tasaCrecimiento = inputTasaAPais.getDoubleValueOrDefault()
 
-                       //actualizar pais
-                       val db = Firebase.firestore
-                       val referencia = db.collection("paises").document(pais?.id!!)
+                            //actualizar pais
+                            val db = Firebase.firestore
+                            val referencia = db.collection("paises").document(pais?.id!!)
 
-                       val nuevoPais = hashMapOf(
-                           "nombre" to it?.nombre,
-                           "capital" to it?.capital,
-                           "poblacion" to it?.poblacion,
-                           "tasaCrecimiento" to it?.tasaCrecimiento
-                       )
+                            val nuevoPais = hashMapOf(
+                                "nombre" to it?.nombre,
+                                "capital" to it?.capital,
+                                "poblacion" to it?.poblacion,
+                                "tasaCrecimiento" to it?.tasaCrecimiento
+                            )
 
-                       referencia
-                           .update(nuevoPais as Map<String, Any>)
-                           .addOnSuccessListener {
-                               adaptadorPais.notifyDataSetChanged()
-                           }
-                           .addOnFailureListener {  }
-                       finish()
-                   }
-                   }
-                   // fin logica
-               }
-           })
+                            referencia
+                                .update(nuevoPais as Map<String, Any>)
+                                .addOnSuccessListener {
+                                    adaptadorPais.notifyDataSetChanged()
+                                }
+                                .addOnFailureListener { }
+                            finish()
+                        }
+                    }
+                    // fin logica
+                }
+            })
         }
 
         // lógica para actualizar Pais
 
     }
+
     interface PaisCallback {
         fun onCallback(pais: BPais)
     }
-    fun consultarPaisId (idPais: String, paisCallback: PaisCallback) {
+
+    fun consultarPaisId(idPais: String, paisCallback: PaisCallback) {
         val db = Firebase.firestore
         val referencia = db.collection("paises")
         referencia

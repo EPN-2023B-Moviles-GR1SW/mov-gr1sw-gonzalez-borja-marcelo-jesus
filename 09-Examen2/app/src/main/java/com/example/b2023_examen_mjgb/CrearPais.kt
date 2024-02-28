@@ -30,7 +30,7 @@ class CrearPais : AppCompatActivity() {
             // crear pais
             val db = Firebase.firestore
             val referencia = db.collection("paises")
-            val ciudadesMap = ciudadesDelPais.map{ ciudad ->
+            val ciudadesMap = ciudadesDelPais.map { ciudad ->
                 mapOf(
                     "nombre" to ciudad.nombre,
                     "poblacion" to ciudad.poblacion,
@@ -51,7 +51,7 @@ class CrearPais : AppCompatActivity() {
                 .addOnSuccessListener {
                     adaptadorPais.notifyDataSetChanged()
                 }
-                .addOnFailureListener {  }
+                .addOnFailureListener { }
             adaptadorPais.notifyDataSetChanged()
             finish()
         }

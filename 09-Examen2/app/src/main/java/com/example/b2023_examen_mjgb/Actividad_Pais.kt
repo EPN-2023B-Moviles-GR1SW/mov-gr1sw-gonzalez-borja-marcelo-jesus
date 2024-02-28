@@ -21,8 +21,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-
 lateinit var adaptadorPais: ArrayAdapter<BPais>
+
 class Actividad_Pais : AppCompatActivity() {
     var query: Query? = null
     val arreglo: ArrayList<BPais> = arrayListOf()
@@ -65,30 +65,36 @@ class Actividad_Pais : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
-            R.id.mi_editar_pais ->{
-                irActividadConId(Actualizar_Pais::class.java, arreglo[posicionItemSeleccionado].id!!)
+        return when (item.itemId) {
+            R.id.mi_editar_pais -> {
+                irActividadConId(
+                    Actualizar_Pais::class.java,
+                    arreglo[posicionItemSeleccionado].id!!
+                )
                 finish()
                 return true
             }
-            R.id.mi_eliminar_pais ->{
+
+            R.id.mi_eliminar_pais -> {
                 eliminarPais(arreglo[posicionItemSeleccionado].id!!)
                 arreglo.removeAt(posicionItemSeleccionado)
                 adaptadorPais.notifyDataSetChanged()
                 mostrarSnackbar("Eliminar Aceptado")
                 return true
             }
-            R.id.mi_ver_ciudades ->{
+
+            R.id.mi_ver_ciudades -> {
                 val idPaisSeleccionado = arreglo[posicionItemSeleccionado].id!!
                 irActividadConId(Actividad_Ciudad::class.java, idPaisSeleccionado)
                 return true
             }
+
             else -> super.onContextItemSelected(item)
         }
     }
 
 
-    fun consultarPaises(adaptador: ArrayAdapter<BPais>){
+    fun consultarPaises(adaptador: ArrayAdapter<BPais>) {
         val db = Firebase.firestore
         val referencia = db.collection("paises")
         limpiarArreglo()
@@ -96,7 +102,7 @@ class Actividad_Pais : AppCompatActivity() {
         referencia
             .get()
             .addOnSuccessListener {
-                for (pais in it){
+                for (pais in it) {
                     pais.id
                     anadirAPais(pais)
                 }
@@ -104,21 +110,20 @@ class Actividad_Pais : AppCompatActivity() {
             }
             .addOnFailureListener {
             }
-
     }
 
-    fun irActividadConId(clase: Class<*>, idPais: String){
-        val intent = Intent(this,clase)
+    fun irActividadConId(clase: Class<*>, idPais: String) {
+        val intent = Intent(this, clase)
         intent.putExtra("ID_PAIS", idPais)
         startActivity(intent)
     }
 
-    fun irActividad(clase: Class<*>){
-        val intent = Intent(this,clase)
+    fun irActividad(clase: Class<*>) {
+        val intent = Intent(this, clase)
         startActivity(intent)
     }
 
-    fun mostrarSnackbar(texto: String){
+    fun mostrarSnackbar(texto: String) {
         Snackbar.make(
             findViewById(R.id.lv_list_paises),
             texto,
@@ -126,7 +131,7 @@ class Actividad_Pais : AppCompatActivity() {
         ).show()
     }
 
-    fun eliminarPais(idPais: String){
+    fun eliminarPais(idPais: String) {
         val db = Firebase.firestore
         val referencia = db.collection("paises")
         referencia
@@ -140,8 +145,8 @@ class Actividad_Pais : AppCompatActivity() {
             }
     }
 
-    fun anadirAPais(pais: QueryDocumentSnapshot){
-        val nuevoPais= BPais(
+    fun anadirAPais(pais: QueryDocumentSnapshot) {
+        val nuevoPais = BPais(
             pais.id,
             pais.data.get("nombre") as String?,
             pais.data.get("capital") as String?,
@@ -152,12 +157,13 @@ class Actividad_Pais : AppCompatActivity() {
         arreglo.add(nuevoPais)
     }
 
-    fun anadirPais(){
+    fun anadirPais() {
         irActividad(CrearPais::class.java)
         adaptadorPais.notifyDataSetChanged()
         finish()
     }
-    fun limpiarArreglo(){
+
+    fun limpiarArreglo() {
         arreglo.clear()
     }
 

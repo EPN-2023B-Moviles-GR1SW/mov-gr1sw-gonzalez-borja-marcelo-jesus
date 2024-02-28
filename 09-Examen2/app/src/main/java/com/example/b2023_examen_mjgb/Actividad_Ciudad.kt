@@ -17,14 +17,44 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 
+import android.annotation.SuppressLint
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
+
 lateinit var adaptadorCiudad: ArrayAdapter<BCiudad>
+
 // para actualizar la lista
 private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
 class Actividad_Ciudad : AppCompatActivity() {
-    val arreglo: ArrayList<BCiudad> = arrayListOf()
+    val arregloCiudades: ArrayList<BCiudad> = arrayListOf()
     var posicionItemSeleccionado = -1
-    var idPaisSeleccionado = -1
-    var ciudadesDelPais: List<BCiudad> = emptyList()
+    var idPaisSeleccionado: String? = null
+
+
+    @SuppressLint("SuspiciousIndentation")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_actividad_ciudad)
+
+        idPaisSeleccionado = intent.getStringExtra("ID_PAIS")
+
+        val listView = findViewById<ListView>(R.id.lv_list_ciudad)
+        adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, arregloCiudades)
+        listView.adapter = adaptadorCiudad
+        adaptadorCiudad.notifyDataSetChanged()
+        consultarCiudadesDelPais(idPaisSeleccionado!!)
+
+        val botonAnadirCiudad = findViewById<Button>(R.id.btn_anadir_ciudades)
+        botonAnadirCiudad.setOnClickListener {
+            anadirCiudad(idPaisSeleccionado!!)
+        }
+        registerForContextMenu(listView)
+    }
 
     override fun onCreateContextMenu(
         menu: ContextMenu?,
@@ -42,30 +72,52 @@ class Actividad_Ciudad : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
-            R.id.mi_editar_ciudad->{
-                idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-                ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
-                var idAEditar= ciudadesDelPais[posicionItemSeleccionado].id
-                var indxArreglo = idAEditar?.let { encontrarIndicePorId(arreglo, it) }
+        return when (item.itemId) {
+            R.id.mi_editar_ciudad -> {
 
                 // Crear intent con la nueva ciudad
                 val intent = Intent(this, ActualizarCiudad::class.java)
-                intent.putExtra("ID_CIUDAD", indxArreglo)
+                intent.putExtra("ID_CIUDAD", arregloCiudades[posicionItemSeleccionado].id)
                 intent.putExtra("ID_PAIS", idPaisSeleccionado)
-                // para actualizar la lista
-                resultLauncher.launch(intent)
+                startActivity(intent)
+                finish()
                 return true
             }
-            R.id.mi_eliminar_ciudad ->{
-                abrirDialogo()
+
+            R.id.mi_eliminar_ciudad -> {
+                eliminarCiudad(arregloCiudades[posicionItemSeleccionado].id!!, idPaisSeleccionado!!)
+                adaptadorCiudad.notifyDataSetChanged()
+                mostrarSnackbar("Eliminar Aceptado")
                 return true
             }
             else -> super.onContextItemSelected(item)
         }
     }
 
-    fun mostrarSnackbar(texto: String){
+    fun eliminarCiudad(idCiudad: String, idPais: String) {
+        val db = Firebase.firestore
+        val referenciaPais = db.collection("paises").document(idPais)
+        val referenciaCiudad = db.collection("ciudades")
+
+        for (ciudad in arregloCiudades) {
+            if (ciudad.id == idCiudad) {
+                arregloCiudades.remove(ciudad)
+                break
+            }
+        }
+        adaptadorCiudad.notifyDataSetChanged()
+        referenciaCiudad
+            .document(idCiudad)
+            .delete()
+            .addOnSuccessListener {
+                referenciaPais
+                    .update("ciudades", arregloCiudades)
+                    .addOnSuccessListener { adaptadorCiudad.notifyDataSetChanged() }
+                    .addOnFailureListener { }
+            }
+    }
+
+    fun mostrarSnackbar(texto: String) {
         Snackbar.make(
             findViewById(R.id.lv_list_ciudad),
             texto,
@@ -73,83 +125,41 @@ class Actividad_Ciudad : AppCompatActivity() {
         ).show()
     }
 
-    fun abrirDialogo() {
-        val builder = AlertDialog.Builder(this)
-        var idAEliminar = ciudadesDelPais[posicionItemSeleccionado].id
-        var indxArreglo = idAEliminar?.let { encontrarIndicePorId(arreglo, it) }
-
-        builder.setTitle("Desea Eliminar "+ arreglo[indxArreglo!!])
-        builder.setPositiveButton("Aceptar",
-            DialogInterface.OnClickListener{ dialog, which ->
-                arreglo.removeAt(indxArreglo)
-
-                actualizarLista()
-
-                mostrarSnackbar("Eliminar Aceptado")
-            })
-        builder.setNegativeButton("Cancelar",null)
-        val dialogo = builder.create()
-        dialogo.show()
-    }
-
-    fun encontrarIndicePorId(arregloCiudades: List<BCiudad>, idBuscado: Int): Int {
-        for ((indice, ciudad) in arregloCiudades.withIndex()) {
-            if (ciudad.id == idBuscado) {
-                return indice // Devolver el índice si se encuentra el ID
-            }
-        }
-        return -1 // Devolver -1 si no se encuentra el ID en el arreglo
-    }
-    fun actualizarLista() {
-        idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
-        ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
-        adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, ciudadesDelPais)
-        val listView = findViewById<ListView>(R.id.lv_list_ciudad)
-        listView.adapter = adaptadorCiudad
-        adaptadorCiudad.notifyDataSetChanged()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_actividad_ciudad)
-
-        idPaisSeleccionado = intent.getIntExtra("ID_PAIS",-1)
-        ciudadesDelPais = arreglo.filter { it.idPaisCorresponde == idPaisSeleccionado }
-
-        val listView = findViewById<ListView>(R.id.lv_list_ciudad)
-        adaptadorCiudad = ArrayAdapter(this, android.R.layout.simple_list_item_1, ciudadesDelPais)
-        listView.adapter = adaptadorCiudad
-        adaptadorCiudad.notifyDataSetChanged()
-
-        val botonAnadirCiudad= findViewById<Button>(R.id.btn_anadir_ciudades)
-        botonAnadirCiudad.setOnClickListener {
-            anadirCiudad()
-
-        }
-
-        registerForContextMenu(listView)
-
-        // para actualizar la lista
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // Reasignar el adaptador a la lista actualizada
-                actualizarLista()
-            }
-        }
-
-    }
-
-    fun anadirCiudad(){
-        idPaisSeleccionado = intent.getIntExtra("ID_PAIS", -1)
-        val nuevaCiudadId = 1
-
+    fun anadirCiudad(idPais: String) {
         // Crear intent con la nueva ciudad
         val intent = Intent(this, CrearCiudad::class.java)
-        intent.putExtra("ID_CIUDAD", nuevaCiudadId)
-        intent.putExtra("ID_PAIS", idPaisSeleccionado)
-        // para actualizar la lista
-        resultLauncher.launch(intent)
+        intent.putExtra("ID_PAIS", idPais)
+        startActivity(intent)
     }
 
+    fun consultarCiudadesDelPais(idPais: String) {
+        val db = Firebase.firestore
+        val referencia = db.collection("paises").document(idPais)
+        limpiarArreglo()
+        adaptadorCiudad.notifyDataSetChanged()
+        referencia
+            .get()
+            .addOnSuccessListener {
+                val ciudades = it.data?.get("ciudades") as ArrayList<HashMap<String, Any>>
+                if (ciudades != null) {
+                    for (ciudad in ciudades) {
+                        val ciudadObj = BCiudad(
+                            ciudad["id"] as String,
+                            ciudad["nombre"] as String,
+                            (ciudad["poblacion"] as Long).toInt(),
+                            ciudad["esCapital"] as Boolean,
+                            ciudad["fechaFund"] as String
+                        )
+                        arregloCiudades.add(ciudadObj)
+                    }
+                }
+                adaptadorCiudad.notifyDataSetChanged()
+            }
+            .addOnFailureListener { }
+    }
+
+    fun limpiarArreglo() {
+        arregloCiudades.clear()
+    }
 
 }
