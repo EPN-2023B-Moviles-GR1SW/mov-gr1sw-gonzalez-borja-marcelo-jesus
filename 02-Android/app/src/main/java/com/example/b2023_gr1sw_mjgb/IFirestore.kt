@@ -25,11 +25,7 @@ class IFirestore : AppCompatActivity() {
 
         // Configurando el list view
         val listView = findViewById<ListView>(R.id.lv_firestore)
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            arreglo
-        )
+        val adaptador = ArrayAdapter(this, android.R.layout.simple_list_item_1, arreglo)
         listView.adapter = adaptador
         adaptador.notifyDataSetChanged()
         // Botones
