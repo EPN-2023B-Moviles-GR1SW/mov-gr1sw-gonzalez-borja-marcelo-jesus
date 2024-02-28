@@ -13,6 +13,7 @@ import android.widget.ListView
 import com.google.android.material.snackbar.Snackbar
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -46,7 +47,17 @@ class Actividad_Pais : AppCompatActivity() {
         botonAnadirPais.setOnClickListener {
             anadirPais()
         }
+
+        val botonActualizarCPais = findViewById<Button>(R.id.btn_actualizar_vista_pais)
+        botonActualizarCPais.setOnClickListener {
+            actualizarPais()
+        }
         registerForContextMenu(listView)
+    }
+
+    fun actualizarPais() {
+        adaptadorPais.notifyDataSetChanged()
+        consultarPaises(adaptadorPais!!)
     }
 
     override fun onCreateContextMenu(
@@ -71,7 +82,6 @@ class Actividad_Pais : AppCompatActivity() {
                     Actualizar_Pais::class.java,
                     arreglo[posicionItemSeleccionado].id!!
                 )
-                finish()
                 return true
             }
 
@@ -134,15 +144,43 @@ class Actividad_Pais : AppCompatActivity() {
     fun eliminarPais(idPais: String) {
         val db = Firebase.firestore
         val referencia = db.collection("paises")
-        referencia
-            .document(idPais)
-            .delete()
+        val referenciaPais = db.collection("paises").document(idPais)
+        val referenciaCiudad = db.collection("ciudades")
+        //ELIMINAR CIUDADES
+        referenciaPais
+            .get()
             .addOnSuccessListener {
-                arreglo.removeIf { it.id == idPais }
-                adaptadorPais!!.notifyDataSetChanged()
+                val ciudades = it.data?.get("ciudades") as ArrayList<HashMap<String, Any>>
+                Log.d("a", "eliminarPais: "+ciudades)
+                if (ciudades != null) {
+                    for (ciudad in ciudades) {
+                        val ciudadObj = BCiudad(
+                            ciudad["id"] as String,
+                            ciudad["nombre"] as String,
+                            (ciudad["poblacion"] as Long).toInt(),
+                            ciudad["esCapital"] as Boolean,
+                            ciudad["fechaFund"] as String
+                        )
+                        Log.d("a", "eliminarPais: "+ciudadObj.id)
+                        referenciaCiudad
+                            .document(ciudadObj.id!!)
+                            .delete()
+                            .addOnSuccessListener {}
+                    }
+                }
+                // ELIMINAR
+                referencia
+                    .document(idPais)
+                    .delete()
+                    .addOnSuccessListener {
+                        arreglo.removeIf { it.id == idPais }
+                        adaptadorPais!!.notifyDataSetChanged()
+                    }
+                    .addOnFailureListener {
+                    }
             }
-            .addOnFailureListener {
-            }
+        //ELIMINAR CIUDADES
+
     }
 
     fun anadirAPais(pais: QueryDocumentSnapshot) {
@@ -160,7 +198,6 @@ class Actividad_Pais : AppCompatActivity() {
     fun anadirPais() {
         irActividad(CrearPais::class.java)
         adaptadorPais.notifyDataSetChanged()
-        finish()
     }
 
     fun limpiarArreglo() {

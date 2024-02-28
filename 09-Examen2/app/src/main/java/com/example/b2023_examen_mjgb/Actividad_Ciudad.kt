@@ -1,7 +1,5 @@
 package com.example.b2023_examen_mjgb
 
-import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,13 +11,9 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 
 import android.annotation.SuppressLint
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -53,9 +47,18 @@ class Actividad_Ciudad : AppCompatActivity() {
         botonAnadirCiudad.setOnClickListener {
             anadirCiudad(idPaisSeleccionado!!)
         }
+
+        val botonActualizarCiudad = findViewById<Button>(R.id.btn_actualizar_vista_ciudad)
+        botonActualizarCiudad.setOnClickListener {
+            actualizarCiudad()
+        }
         registerForContextMenu(listView)
     }
 
+    fun actualizarCiudad(){
+        adaptadorCiudad.notifyDataSetChanged()
+        consultarCiudadesDelPais(idPaisSeleccionado!!)
+    }
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
@@ -74,13 +77,11 @@ class Actividad_Ciudad : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.mi_editar_ciudad -> {
-
                 // Crear intent con la nueva ciudad
                 val intent = Intent(this, ActualizarCiudad::class.java)
                 intent.putExtra("ID_CIUDAD", arregloCiudades[posicionItemSeleccionado].id)
                 intent.putExtra("ID_PAIS", idPaisSeleccionado)
                 startActivity(intent)
-                finish()
                 return true
             }
 
