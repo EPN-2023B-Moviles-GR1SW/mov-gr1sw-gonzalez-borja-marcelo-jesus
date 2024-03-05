@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="2dp"
+    android:paddingLeft="2dp"
+    android:paddingTop="2dp"
+    android:paddingEnd="2dp"
+    android:paddingRight="2dp"
+    android:paddingBottom="2dp"
+    app:layout_constraintWidth_percent="0.33">
+
+
+    <ImageView
+        android:id="@+id/iv_front_page"
+        android:layout_width="118dp"
+        android:layout_height="176dp"
+        app:srcCompat="@drawable/_d0d2f3d3af1d3c06bec3a33775ec6db" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="158dp"
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Marcar como visto" />
+</LinearLayout>

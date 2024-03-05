@@ -1,31 +1,33 @@
 package com.example.proyecto
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AnimeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AnimeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+
+    private val BASE_URL = "https://api.jikan.moe/v4/"
+    private var animeList: ArrayList<Anime> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -33,20 +35,42 @@ class AnimeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_anime, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_anime, container, false)
+        recyclerView = view.findViewById<RecyclerView>(R.id.rv_animes)
+        val contextInFragment: Context = requireContext()
+
+
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.layoutManager = GridLayoutManager(contextInFragment, 3)
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val apiService = retrofit.create(ApiService::class.java)
+        val call = apiService.fetchData("anime")
+        Log.e("data", call.toString())
+        call?.enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val result = response.body()!!
+                    val animeAdapter = AnimeAdapter(ArrayList(result.data))
+
+                    recyclerView.adapter = animeAdapter
+
+
+                    animeAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {}
+        })
+
+        return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AnimeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AnimeFragment().apply {
@@ -56,4 +80,6 @@ class AnimeFragment : Fragment() {
                 }
             }
     }
+
+
 }
