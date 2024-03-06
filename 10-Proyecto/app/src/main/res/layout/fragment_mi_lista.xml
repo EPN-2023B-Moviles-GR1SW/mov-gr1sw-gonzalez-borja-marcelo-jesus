@@ -8,7 +8,7 @@
     tools:context=".MiListaFragment" >
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iv_img_anime_list"
         android:layout_width="128dp"
         android:layout_height="95dp"
         android:layout_marginStart="16dp"
@@ -19,27 +19,27 @@
         app:srcCompat="@drawable/_d0d2f3d3af1d3c06bec3a33775ec6db" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_title_anime_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:text="TextView"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_img_anime_list"
+        app:layout_constraintStart_toEndOf="@+id/iv_img_anime_list"
+        app:layout_constraintTop_toTopOf="@+id/iv_img_anime_list"
         app:layout_constraintVertical_bias="0.473" />
 
     <RadioButton
-        android:id="@+id/radioButton2"
+        android:id="@+id/rb_anime_list"
         android:layout_width="52dp"
         android:layout_height="47dp"
         android:layout_marginStart="80dp"
         android:scaleX="2"
         android:scaleY="2"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title_anime_list"
+        app:layout_constraintStart_toEndOf="@+id/tv_title_anime_list"
+        app:layout_constraintTop_toTopOf="@+id/tv_title_anime_list"
         app:layout_constraintVertical_bias="0.464" />
 </androidx.constraintlayout.widget.ConstraintLayout>
